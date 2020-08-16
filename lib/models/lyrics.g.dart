@@ -1,17 +1,17 @@
 import 'dart:convert';
 
-LyricSong lyricSongFromJson(String str) => LyricSong.fromJson(json.decode(str));
+LyricDataRaw lyricSongFromJson(String str) => LyricDataRaw.fromJson(json.decode(str));
 
-String lyricSongToJson(LyricSong data) => json.encode(data.toJson());
+String lyricSongToJson(LyricDataRaw data) => json.encode(data.toJson());
 
-class LyricSong {
-    LyricSong({
+class LyricDataRaw {
+    LyricDataRaw({
         this.message,
     });
 
     Message message;
 
-    factory LyricSong.fromJson(Map<String, dynamic> json) => LyricSong(
+    factory LyricDataRaw.fromJson(Map<String, dynamic> json) => LyricDataRaw(
         message: Message.fromJson(json["message"]),
     );
 

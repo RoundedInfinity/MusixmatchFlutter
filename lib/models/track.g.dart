@@ -1,17 +1,17 @@
 import 'dart:convert';
 
-Track trackFromJson(String str) => Track.fromJson(json.decode(str));
+TrackDataRaw trackFromJson(String str) => TrackDataRaw.fromJson(json.decode(str));
 
-String trackToJson(Track data) => json.encode(data.toJson());
+String trackToJson(TrackDataRaw data) => json.encode(data.toJson());
 
-class Track {
-    Track({
+class TrackDataRaw {
+    TrackDataRaw({
         this.message,
     });
 
     Message message;
 
-    factory Track.fromJson(Map<String, dynamic> json) => Track(
+    factory TrackDataRaw.fromJson(Map<String, dynamic> json) => TrackDataRaw(
         message: Message.fromJson(json["message"]),
     );
 

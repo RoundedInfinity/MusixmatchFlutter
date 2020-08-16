@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:musixmatch/musixmatch.dart';
 void main() {
@@ -26,9 +27,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  void getSomething() {
+  void getSomething() async{
+    
     var api = MusixmatchApi('1ae20278a4068889effe93f46beabbad',isLogging: true);
-    api.getTrackRaw('hello','adelle');
+    LyricsData data = await api.getLyrics('Back in Black', 'AC/DC');
+    print(data.copyright);
   }
   @override
   Widget build(BuildContext context) {
