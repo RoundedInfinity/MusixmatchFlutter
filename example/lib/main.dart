@@ -40,6 +40,12 @@ class _HomePageState extends State<HomePage> {
     query.forEach((element) {
       print('${element.trackName} -- ${element.likes}');
     });
+    api.getLyrics(query[0].trackName, query[0].artistName).then((value) => print(value.lyricsBody));
+  }
+
+  void getById() async {
+    var data = await api.getTrackById(84213309);
+    print(data.artistName);
   }
 
   @override
