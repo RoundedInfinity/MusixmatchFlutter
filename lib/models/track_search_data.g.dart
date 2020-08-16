@@ -163,7 +163,6 @@ class Track {
         artistName: json["artist_name"],
         albumCoverart800X800: json["album_coverart_800x800"],
         albumCoverart100X100: json["album_coverart_100x100"],
-        trackNameTranslationList: List<String>.from(json["track_name_translation_list"].map((x) => x)),
         trackName: json["track_name"],
         restricted: json["restricted"],
         hasSubtitles: json["has_subtitles"],

@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void search() async {
-    var query = await api.searchTrack('Bohemian Rhapsody','Queen',null,(a,b) => a.likes.compareTo(b.likes));
+    var query = await api.searchTrack('Bohemian Rhapsody','Queen','mama');
     query.forEach((element) {
       print('${element.trackName} -- ${element.likes}');
     });

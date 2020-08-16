@@ -16,6 +16,10 @@ class MusixmatchApi {
   final String token;
 
   MusixmatchApi(this.token, {this.isLogging = false});
+  Future<bool> testBool() async {
+    await Future.delayed(Duration(seconds: 1));
+    return true;
+  }
 
 //---LYRICS---
   Future<LyricDataRaw> getLyricsRaw(String track, String artist) async {
@@ -89,11 +93,13 @@ class MusixmatchApi {
     return tracks;
   }
 
-  Future<List<TrackData>> searchTrack(
-      [String track,
-      String artist,
-      String lyrics,
-      int Function(TrackData, TrackData) customSort]) async {
+  Future<List<TrackData>> searchTrack([
+    String track,
+    String artist,
+    String lyrics,
+  ]) async {
+    if (isLogging)
+      l.log('Searching Track: ' + track + 'from' + artist + 'lyrics:' + lyrics);
     List<TrackData> response = [];
     final data = await getTrackSearchRaw(track, artist, lyrics);
     data.message.body.trackList.forEach((element) {
@@ -111,14 +117,13 @@ class MusixmatchApi {
             updatedTime: DateTime.parse(element.track.updatedTime),
           ),
         );
-        customSort != null
-            ? response.sort(customSort)
-            : response.sort((a, b) => b.likes.compareTo(a.likes));
+
+        response.sort((a, b) => b.likes.compareTo(a.likes));
       } catch (e) {
         l.logError('Could not parse tracks', e);
       }
     });
-
+    if (isLogging) l.log('Search finished with ${response.length} results');
     return response;
   }
 

@@ -26,6 +26,7 @@ class Validator {
         break;
       case 404:
         _l.logError('404: The requested resource was not found.');
+        throw Exception('Hello');
         break;
       case 405:
         _l.logError('405: The requested method was not found.');
