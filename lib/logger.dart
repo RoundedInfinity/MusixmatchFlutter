@@ -1,9 +1,9 @@
 import 'dart:developer' as developer;
 
 class Logger {
-  void log(String message) {
+  void log(var message) {
     developer.log(
-      message,
+      message.toString(),
       name: '\x1B[33m' + "Musixmatch",
     );
   }
@@ -19,7 +19,7 @@ class Logger {
     developer.log(
       message,
       name: '\x1B[31m' + '⚠ Musixmatch',
-      error: error,
+      error: '\x1B[93m' + error,
       level: 4,
     );
   }

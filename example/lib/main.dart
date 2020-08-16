@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:musixmatch/musixmatch.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -26,13 +26,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var api = MusixmatchApi('1ae20278a4068889effe93f46beabbad', isLogging: true);
+  void getSomething() async {
+    LyricsData lyricData = await api.getLyrics('Back in Black', 'AC/DC');
 
-  void getSomething() async{
-    
-    var api = MusixmatchApi('1ae20278a4068889effe93f46beabbad',isLogging: true);
-    LyricsData data = await api.getLyrics('Back in Black', 'AC/DC');
-    print(data.copyright);
+    print(lyricData.copyright);
+    TrackData trackData = await api.getTrack('Back in Black', 'AC/DC');
+    print(trackData.trackName);
   }
+
+  void search() async {
+    var query = await api.searchTrack('Bohemian Rhapsody','Queen',null,(a,b) => a.likes.compareTo(b.likes));
+    query.forEach((element) {
+      print('${element.trackName} -- ${element.likes}');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,8 +49,10 @@ class _HomePageState extends State<HomePage> {
       body: Center(
           child: Column(
         children: [
-          RaisedButton(onPressed: getSomething,child: Text('test'),),
-
+          RaisedButton(
+            onPressed: search,
+            child: Text('test'),
+          ),
         ],
       )),
     );
